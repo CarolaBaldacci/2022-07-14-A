@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
@@ -72,4 +73,17 @@ public class Model {
 		return result;
 	}
 	
+//SIMULAZIONE
+	
+	public String simula(double prob, int durata) {
+		Simulator sim = new Simulator(prob, durata, this.grafo);
+		sim.init();
+		sim.run();
+		List<Condivisioni> condivisioni= sim.getCondivisioni();
+		String result="";
+		for(Condivisioni c: condivisioni) {
+			result+=c.toString()+"\n";
+		}
+		return result;
+	}
 }

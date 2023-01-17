@@ -90,6 +90,30 @@ public class FXMLController {
     @FXML
     void doSimula(ActionEvent event) {
 
+    	txtResult.clear();
+    	String b= cmbBorough.getValue();
+    	if(b==null) {
+    		txtResult.appendText("seleziona un borgo per creare il grafo");
+    		return;
+    	}
+    	try{
+    		double p= Double.parseDouble(txtProb.getText());
+    		if(p<0.2 ||p>0.9) {
+    			txtResult.appendText("fornire p compreso tra 0.2 e 0.9");
+    			return;
+    		}
+    		int d= Integer.parseInt(txtDurata.getText());
+    		if(d<0) {
+    			txtResult.appendText("fornire d intero e positivo");
+    		}
+    		String result=this.model.simula(p,d);
+    		txtResult.appendText(result);
+    		
+    	}catch(NumberFormatException ex) {
+    		txtResult.appendText("Errore: p e d devono essere valori numerici \n");
+    		return;
+    	}
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
